@@ -65,7 +65,10 @@
 				window.open("/video/" + item.title + '.mp4');
 			} else {
 				item.isDownloading = true;
-				$http.get("/download_by_back" + "?link=" + encodeURIComponent(item.link) + "&title=" + encodeURIComponent(item.title)).then(response => {
+				$http.post("/download_by_back", {
+					link: item.link,
+					title: item.title
+				}).then(response => {
 					item.isDownload = true;
 					item.isDownloading = false;
 				});
