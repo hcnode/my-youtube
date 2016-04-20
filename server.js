@@ -84,7 +84,7 @@ app.post("/playlist", function (req, res, next) {
 		}
 	);
 });
-app.get("/download_by_back", function (req, res, next) {
+app.post("/download_by_back", function (req, res, next) {
 	download.back({
 		link : req.body.link,
 		title : req.body.title
