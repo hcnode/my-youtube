@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube trending</title>
+    <style>
+        div {
+            padding:25px;
+            clear: both;
+        }
+        .title {
+            margin-bottom: 30px;
+            margin-left : 30px;
+        }
+        .description {
+            display: block;
+            margin-left: 350px;
+            margin-top: 20px;
+            width: 600px;
+        }
+        img {
+            display: block;
+            float: left;
+        }
+    </style>
+</head>
+<body ng-controller="main">
+    输入视频地址:&nbsp;<input ng-model="url">&nbsp;<button ng-click="download()">下载</button><br>
+    输入播放列表:&nbsp;<input ng-model="playListUrl">&nbsp;<button ng-click="getPlayList()">打开</button><br>
+    <button ng-click="getTrending()">加载trending</button>
+    <h2>{{head}}</h2>
+    <hr>
+    <div ng-show="loading">加载中...</div>
+    <div ng-repeat="item in data">
+        <img src="{{item.img}}">
+        <span class="title"><a href="{{item.link}}" target="_blank">{{item.title}}</a>&nbsp;&nbsp;
+            <button ng-click="downloadOrPlay(item)">{{item.isDownload ? '打开' : item.isDownloading ? '下载中' : '下载'}}</button>
+            <br>
+            <span class="description" ng-bind-html="item.description|to_trusted "></span>
+        </span>
+    </div>
+</body>
+<script src="./bundle.js"></script>
+</html>

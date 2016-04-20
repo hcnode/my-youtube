@@ -1,0 +1,29 @@
+{
+  "name": "youtube",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "build": "webpack --progress --profile --colors --watch --debug"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "express": "^4.13.4",
+    "jquery": "^2.2.3",
+    "jsdom": "^8.4.0",
+    "serve-index": "^1.7.3",
+    "youtube-dl": "^1.11.1"
+  },
+  "devDependencies": {
+    "babel": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-react": "latest",
+    "webpack": "^1.4.13"
+  }
+}
