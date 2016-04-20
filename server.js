@@ -6,10 +6,13 @@ var express = require('express');
 var download = require('./download');
 var fs = require('fs');
 var serveIndex = require('serve-index');
+var bodyParser = require('body-parser');
+
 
 
 var app = express();
 app.set('port',process.env.PORT || 8001);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(__dirname + '/public'))
 app.use('/video', express.static(__dirname + '/video'))
 app.use('/source', serveIndex(__dirname, {'icons': true, view: "details"}))
@@ -48,7 +51,7 @@ app.get("/trending", function (req, res, next) {
 	);
 });
 app.get("/playlist", function (req, res, next) {
-	var url = req.query.url;
+	var url = req.body.url;
 	jsdom.env(
 		url,
 		["http://code.jquery.com/jquery.js"],
