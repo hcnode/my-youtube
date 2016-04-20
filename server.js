@@ -50,7 +50,7 @@ app.get("/trending", function (req, res, next) {
 		}
 	);
 });
-app.get("/playlist", function (req, res, next) {
+app.post("/playlist", function (req, res, next) {
 	var url = req.body.url;
 	jsdom.env(
 		url,
