@@ -86,8 +86,8 @@ app.post("/playlist", function (req, res, next) {
 });
 app.get("/download_by_back", function (req, res, next) {
 	download.back({
-		link : req.query.link,
-		title : req.query.title
+		link : req.body.link,
+		title : req.body.title
 	}, function () {
 		res.json({code:0});
 	});
