@@ -13,6 +13,7 @@ var bodyParser = require('body-parser');
 var app = express();
 app.set('port',process.env.PORT || 8001);
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'))
 app.use('/video', express.static(__dirname + '/video'))
 app.use('/source', serveIndex(__dirname, {'icons': true, view: "details"}))
