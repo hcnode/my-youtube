@@ -23,7 +23,7 @@ app.controller("main", ['$scope', '$timeout','$http', function ($scope, $timeout
 	}
 	$scope.getPlayList = () => {
 		$scope.loading = true;
-		$http.get("/playlist?url=" + encodeURIComponent($scope.playListUrl)).then(response => {
+		$http.post("/playlist", {url : $scope.playListUrl}).then(response => {
 			$scope.data = response.data.list;
 			$scope.head = response.data.title;
 			$scope.loading = false;
