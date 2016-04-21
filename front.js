@@ -12,6 +12,7 @@ app.set('port',process.env.PORT || 8005);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'))
+app.use('/video', express.static(__dirname + '/video'))
 app.get('/getplaylist', function (req, res, next) {
 	var result = [];
 	var dbpath = __dirname + '/db/';
