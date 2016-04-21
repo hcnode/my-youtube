@@ -14,12 +14,19 @@ app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'))
 app.get('/getplaylist', function (req, res, next) {
 	var result = [];
-	var dbpath = __dirname + '/db/'
+	var dbpath = __dirname + '/db/';
+	var videopath = __dirname + '/video/';
 	fs.readdir(dbpath, function (err, files) {
 		files.filter(file => file != '.' && file != '..').forEach(file => {
+			var list = JSON.parse(fs.readFileSync(dbpath + file).toString());
+			list.forEach(item => {
+				if(fs.existsSync(videopath + item.title)){
+					item.isDownload = true;
+				}
+			});
 			result.push({
 				title : file,
-				list : JSON.parse(fs.readFileSync(dbpath + file).toString())
+				list : list
 			});
 		});
 		res.json(result);
