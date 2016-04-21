@@ -7,12 +7,25 @@ var download = require('./download');
 var fs = require('fs');
 // var serveIndex = require('serve-index');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+
 
 
 
 var app = express();
 app.set('port',process.env.PORT || 8001);
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 app.use(require('./basicAuth')());
+app.use(function (req, res, next) {
+	if (req.authenticated || req.session.isAuth) {
+		req.session.isAuth = true;
+		next();
+	} else {
+		res.set("WWW-Authenticate", "Basic realm=\"client Login\"");
+		res.statusCode =401;
+		res.end();
+	}
+});
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'))
