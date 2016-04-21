@@ -31,7 +31,9 @@
     </style>
 </head>
 <body ng-controller="main">
-    <div ng-repeat="category in data"><a href="#{{$index}}">{{category.title}}</a></div>
+    <ul>
+        <li ng-repeat="category in data" ><a href="#{{$index}}">{{category.title}}</a></li>
+    </ul>
     <div ng-repeat="category in data" id="{{$index}}">
         <h2>{{category.title}}</h2>
         <hr>
