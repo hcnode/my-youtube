@@ -11,9 +11,11 @@ var app = express();
 app.set('port',process.env.PORT || 8005);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 app.use('/', express.static(__dirname + '/public'))
 app.use('/video', express.static(__dirname + '/video'))
-app.get('/getplaylist', function (req, res, next) {
+app.get('/youtube', function (req, res, next) {
 	var result = [];
 	var dbpath = __dirname + '/db/';
 	var videopath = __dirname + '/video/';
@@ -30,7 +32,7 @@ app.get('/getplaylist', function (req, res, next) {
 				list : list
 			});
 		});
-		res.json(result);
+		res.render('front', { data:result });
 	});
 });
 //listen port

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube trending</title>
+    <style>
+        .item {
+            padding:25px;
+            clear: both;
+        }
+        .title {
+            margin-bottom: 30px;
+            margin-left : 30px;
+        }
+        .description {
+            display: block;
+            margin-left: 350px;
+            margin-top: 20px;
+            width: 600px;
+        }
+        img {
+            display: block;
+            float: left;
+        }
+        button {
+            height: 25px;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body ng-controller="main">
+    <ul>
+        <%
+            for(var i=0;i<data.length;i++) {
+                var category = data[i]
+        %>
+                <li><a href="<%=i%>"><%=category.title%></a></li>
+        <%  }%>
+    </ul>
+    <%
+    for(var i=0;i<data.length;i++) {
+        var category = data[i]
+    %>
+        <div id="<%=i%>">
+            <h2><%=category.title%></h2>
+            <hr>
+            <%
+            for(var j=0;j<category.list.length;j++) {
+                var item = category.list[j]
+            %>
+            <div class="item">
+                <img src="<%-item.img%>">
+                <span class="title"><a href="<%-item.link%>" target="_blank"><%=item.title%></a>&nbsp;&nbsp;
+                    <%if(item.isDownload){%><button onclick="open('/video/<%-item.title%>.mp4')">打开</button><%}%>
+                    <br>
+                    <span class="description"><%=item.description%></span>
+                </span>
+            </div>
+            <%}%>
+        </div>
+    <%  }%>
+
+</body>
+<!--<script src="../public/front.js"></script>-->
+</html>
