@@ -122,7 +122,24 @@ app.post("/download_by_back", function (req, res, next) {
 		link : req.body.link,
 		title : req.body.title
 	}, function () {
-		res.json({code:0});
+		var head = req.body.head;
+		if(head){
+			if(fs.existsSync(__dirname + "/db/" + head)){
+				fs.readFile(__dirname + "/db/" + head, function (err, data) {
+					var json = JSON.parse(data.toString())
+					json.forEach(item => {
+						if(item.title == req.body.title){
+							item.isDownload = true;
+						}
+					});
+					fs.writeFile(__dirname + "/db/" + head, JSON.stringify(json, null, '\t'), function (err, data) {
+						res.json({code:0});
+					})
+				})
+			}
+		}else{
+			res.json({code:0});
+		}
 	});
 });
 app.get("/download", function (req, res, next) {

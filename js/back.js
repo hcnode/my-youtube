@@ -14,7 +14,8 @@ app.controller("main", ['$scope', '$timeout','$http', function ($scope, $timeout
 			item.isDownloading = true;
 			$http.post("/download_by_back", {
 				link: item.link,
-				title: item.title
+				title: item.title,
+				head : $scope.head
 			}).then(response => {
 				item.isDownload = true;
 				item.isDownloading = false;
