@@ -5,19 +5,20 @@ var jsdom = require("jsdom");
 var express = require('express');
 var download = require('./download');
 var fs = require('fs');
-var serveIndex = require('serve-index');
+// var serveIndex = require('serve-index');
 var bodyParser = require('body-parser');
 
 
 
 var app = express();
 app.set('port',process.env.PORT || 8001);
+app.use(require('./basicAuth')());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/public'))
 app.use('/video', express.static(__dirname + '/video'))
-app.use('/source', serveIndex(__dirname, {'icons': true, view: "details"}))
-app.use('/source', express.static(__dirname))
+// app.use('/source', serveIndex(__dirname, {'icons': true, view: "details"}))
+// app.use('/source', express.static(__dirname))
 
 app.get("/trending", function (req, res, next) {
 	jsdom.env(
