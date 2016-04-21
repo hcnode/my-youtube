@@ -20,7 +20,7 @@ app.get('/getplaylist', function (req, res, next) {
 		files.filter(file => file != '.' && file != '..').forEach(file => {
 			var list = JSON.parse(fs.readFileSync(dbpath + file).toString());
 			list.forEach(item => {
-				if(fs.existsSync(videopath + item.title)){
+				if(fs.existsSync(videopath + item.title + ".mp4")){
 					item.isDownload = true;
 				}
 			});
