@@ -4,13 +4,14 @@ var webpack = require('webpack')
 module.exports = {
     devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
 
-    entry: [
-        './js/app.js',
-    ],
+    entry: {
+        back : './js/back.js',
+        front : './js/front.js'
+    },
 
     output: {
         path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
 
     resolve: {

@@ -22,11 +22,16 @@
             display: block;
             float: left;
         }
+        button {
+            height: 25px;
+        }
     </style>
 </head>
 <body ng-controller="main">
     输入视频地址:&nbsp;<input ng-model="url">&nbsp;<button ng-click="download()">下载</button><br>
-    输入播放列表:&nbsp;<input ng-model="playListUrl">&nbsp;<button ng-click="getPlayList()">打开</button><br>
+    输入播放列表:&nbsp;<input ng-model="playListUrl">&nbsp;
+    <button ng-click="getPlayList()">打开</button>
+    <button ng-click="savePlayList()">保存</button><br>
     <button ng-click="getTrending()">加载trending</button>
     <h2>{{head}}</h2>
     <hr>
@@ -40,5 +45,5 @@
         </span>
     </div>
 </body>
-<script src="./bundle.js"></script>
+<script src="./back.js"></script>
 </html>

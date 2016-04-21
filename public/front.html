@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube trending</title>
+    <style>
+        .item {
+            padding:25px;
+            clear: both;
+        }
+        .title {
+            margin-bottom: 30px;
+            margin-left : 30px;
+        }
+        .description {
+            display: block;
+            margin-left: 350px;
+            margin-top: 20px;
+            width: 600px;
+        }
+        img {
+            display: block;
+            float: left;
+        }
+        button {
+            height: 25px;
+        }
+    </style>
+</head>
+<body ng-controller="main">
+    <div ng-repeat="category in data">
+        <h2>{{category.title}}</h2>
+        <hr>
+        <div ng-repeat="item in category.list" class="item">
+            <img src="{{item.img}}">
+            <span class="title"><a href="{{item.link}}" target="_blank">{{item.title}}</a>&nbsp;&nbsp;
+                <button ng-click="downloadOrPlay(item)">{{item.isDownload ? '打开' : item.isDownloading ? '下载中' : '下载'}}</button>
+                <br>
+                <span class="description" ng-bind-html="item.description|to_trusted "></span>
+            </span>
+        </div>
+    </div>
+</body>
+<script src="./front.js"></script>
+</html>

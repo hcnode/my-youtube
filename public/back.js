@@ -44,17 +44,10 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * Created by harry on 16/4/19.
 	 */
-	var angular = __webpack_require__(2);
+	var angular = __webpack_require__(1);
 	
 	var app = angular.module("app", []);
 	
@@ -93,6 +86,12 @@
 			});
 		};
 	
+		$scope.savePlayList = () => {
+			$http.post("/savePlaylist", { url: $scope.playListUrl }).then(response => {
+				console.log(response.data.code);
+			});
+		};
+	
 		if (location.hash.indexOf("playlist") > -1) {
 			$scope.playListUrl = location.hash.substr('#playlist='.length);
 			$scope.getPlayList();
@@ -104,14 +103,14 @@
 	}]);
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(3);
+	__webpack_require__(2);
 	module.exports = angular;
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	/**
@@ -16130,4 +16129,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=back.js.map

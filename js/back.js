@@ -40,6 +40,12 @@ app.controller("main", ['$scope', '$timeout','$http', function ($scope, $timeout
 		});
 	}
 
+	$scope.savePlayList = () => {
+		$http.post("/savePlaylist", {url : $scope.playListUrl}).then(response => {
+			console.log(response.data.code);
+		});
+	}
+
 	if(location.hash.indexOf("playlist") > -1){
 		$scope.playListUrl = location.hash.substr('#playlist='.length);
 		$scope.getPlayList();

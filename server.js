@@ -65,7 +65,7 @@ app.get("/trending", function (req, res, next) {
 		}
 	);
 });
-app.post("/playlist", function (req, res, next) {
+function getPlaylist(req, cb) {
 	var url = req.body.url;
 	jsdom.env(
 		url,
@@ -90,13 +90,32 @@ app.post("/playlist", function (req, res, next) {
 						isDownload : !!fs.existsSync(__dirname + "/video/"+ title +".mp4")
 					});
 				}
-				res.json({
+				cb({
 					title : $(".playlist-header h3 a").html(),
 					list :result
 				});
 			}
 		}
 	);
+}
+app.post("/playlist", function (req, res, next) {
+	getPlaylist(req, function (result) {
+		res.json(result);
+	});
+});
+
+app.post("/savePlaylist", function (req, res, next) {
+	getPlaylist(req, function (result) {
+		var title = result.title;
+		var data = result.list;
+		fs.writeFile(__dirname + '/db/' + title, JSON.stringify(data, null, '\t'), (err) => {
+			if(err){
+				res.json({code:400});
+			}else{
+				res.json({code:200});
+			}
+		});
+	});
 });
 app.post("/download_by_back", function (req, res, next) {
 	download.back({
